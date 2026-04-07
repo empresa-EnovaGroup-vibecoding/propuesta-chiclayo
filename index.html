@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta &mdash; Chiclayo Propiedades</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #000000;
+            --dark: #111111;
+            --gray-900: #1a1a1a;
+            --gray-700: #444444;
+            --gray-500: #777777;
+            --gray-400: #999999;
+            --gray-300: #bbbbbb;
+            --gray-200: #e0e0e0;
+            --gray-100: #f5f5f5;
+            --white: #ffffff;
+            --accent: #ff5c35;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--gray-900);
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            font-weight: 300;
+        }
+
+        /* ===== MOBILE FIRST — single column ===== */
+
+        .block {
+            padding: 48px 28px;
+        }
+
+        @media (min-width: 640px) {
+            .block { padding: 72px 60px; }
+        }
+
+        @media (min-width: 800px) {
+            .block { padding: 80px 80px; }
+        }
+
+        .max-w {
+            max-width: 600px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: var(--black);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 640px) {
+            .hero { padding: 50px 60px; }
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,92,53,0.08) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--white);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            color: var(--gray-500);
+            letter-spacing: 1px;
+        }
+
+        .hero-center {
+            position: relative;
+            z-index: 1;
+            padding: 60px 0;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 200;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 strong {
+            font-weight: 500;
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: var(--gray-500);
+            margin-top: 20px;
+            font-weight: 300;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-client {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .hero-client .lbl {
+            font-size: 10px;
+            color: var(--gray-500);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-client .val {
+            font-size: 16px;
+            color: var(--white);
+            font-weight: 400;
+        }
+
+        .hero-scroll {
+            font-size: 11px;
+            color: var(--gray-500);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-scroll .arrow {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+
+        /* ===== TEXT SECTIONS ===== */
+        .text-section {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .label-row {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .big-text {
+            font-size: clamp(24px, 5vw, 38px);
+            font-weight: 200;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            color: var(--gray-900);
+        }
+
+        .big-text strong {
+            font-weight: 500;
+        }
+
+        .big-text em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--accent);
+        }
+
+        .body-text {
+            font-size: 15px;
+            color: var(--gray-500);
+            line-height: 1.75;
+            margin-top: 20px;
+            max-width: 520px;
+        }
+
+        /* ===== FEATURES ===== */
+        .feat-list {
+            margin-top: 40px;
+        }
+
+        .feat-row {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .feat-row:first-child {
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .feat-num {
+            font-size: 12px;
+            color: var(--gray-300);
+            font-weight: 400;
+            min-width: 28px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .feat-name {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--gray-900);
+            flex: 1;
+        }
+
+        .feat-desc {
+            font-size: 13px;
+            color: var(--gray-400);
+            max-width: 220px;
+            text-align: right;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .feat-desc { display: block; }
+        }
+
+        /* ===== PRICE ===== */
+        .price-section {
+            background: var(--black);
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .price-big {
+            font-size: clamp(64px, 15vw, 120px);
+            font-weight: 200;
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: -3px;
+        }
+
+        .price-big .dollar {
+            font-size: 0.4em;
+            vertical-align: top;
+            line-height: 1.8;
+            font-weight: 300;
+            color: var(--gray-500);
+        }
+
+        .price-unit {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 300;
+            margin-top: 8px;
+            letter-spacing: 2px;
+        }
+
+        .price-desc {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 300;
+            margin-top: 32px;
+            line-height: 1.7;
+        }
+
+        .price-includes {
+            list-style: none;
+            margin-top: 40px;
+            text-align: left;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .price-includes li {
+            font-size: 14px;
+            color: rgba(255,255,255,0.45);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            font-weight: 300;
+        }
+
+        .price-includes li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ===== PAYMENT ===== */
+        .pay-row {
+            display: flex;
+            gap: 0;
+            margin-top: 32px;
+        }
+
+        .pay-card {
+            flex: 1;
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+
+        .pay-card:first-child {
+            border-right: none;
+            background: var(--gray-100);
+        }
+
+        .pay-card .p-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 10px;
+        }
+
+        .pay-card .p-amount {
+            font-size: clamp(28px, 6vw, 38px);
+            font-weight: 200;
+            color: var(--gray-900);
+            letter-spacing: -1px;
+        }
+
+        .pay-card .p-desc {
+            font-size: 13px;
+            color: var(--gray-400);
+            margin-top: 6px;
+            font-weight: 300;
+        }
+
+        /* ===== TIMELINE ===== */
+        .tl-list {
+            margin-top: 32px;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 24px;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--gray-100);
+            align-items: baseline;
+        }
+
+        .tl-item:first-child {
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .tl-step {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 200;
+            color: var(--gray-200);
+            min-width: 40px;
+            letter-spacing: -1px;
+        }
+
+        .tl-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .tl-info p {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ===== REQUIREMENTS ===== */
+        .req-grid {
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        @media (min-width: 480px) {
+            .req-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .req-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        @media (min-width: 480px) {
+            .req-item:nth-child(odd) { padding-right: 20px; }
+            .req-item:nth-child(even) { padding-left: 20px; }
+        }
+
+        .req-item::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .req-item span {
+            font-size: 14px;
+            color: var(--gray-700);
+            font-weight: 300;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: var(--black);
+            text-align: center;
+        }
+
+        .cta-text {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 200;
+            color: var(--white);
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            margin-bottom: 32px;
+        }
+
+        .cta-text strong {
+            font-weight: 400;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 16px 48px;
+            border-radius: 100px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        .cta-small {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .hero { min-height: auto; }
+            .price-section, .cta-section, .hero, .pay-card:first-child {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+        <div class="hero-glow"></div>
+
+        <div class="hero-top">
+            <div class="hero-logo">Enova</div>
+            <div class="hero-tag">Abril 2026</div>
+        </div>
+
+        <div class="hero-center">
+            <div class="hero-label">Propuesta</div>
+            <h1>Su nueva<br>p&aacute;gina web,<br><strong>sin l&iacute;mites.</strong></h1>
+            <p class="hero-sub">Redise&ntilde;o profesional para chiclayopropiedades.com</p>
+        </div>
+
+        <div class="hero-bottom">
+            <div class="hero-client">
+                <span class="lbl">Preparado para</span>
+                <span class="val">Jorge Laredo</span>
+            </div>
+            <div class="hero-scroll">
+                Deslizar <span class="arrow">&darr;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EL PROBLEMA ===== -->
+    <div class="block text-section">
+        <div class="label-row">01 &mdash; Diagn&oacute;stico</div>
+        <div class="max-w">
+            <div class="big-text">
+                Su p&aacute;gina se rompe porque la tecnolog&iacute;a que usaron <em>no fue dise&ntilde;ada para durar.</em>
+            </div>
+            <p class="body-text">
+                Hostinger Horizons genera c&oacute;digo autom&aacute;tico que no resiste cambios. Cada modificaci&oacute;n da&ntilde;a la estructura. Mientras tanto, los clientes que lo buscan en Google encuentran una p&aacute;gina en blanco.
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== LA SOLUCION ===== -->
+    <div class="block text-section">
+        <div class="label-row">02 &mdash; Soluci&oacute;n</div>
+        <div class="max-w">
+            <div class="big-text">
+                Una p&aacute;gina <strong>nueva,</strong> r&aacute;pida y que <strong>usted pueda evolucionar</strong> sin miedo.
+            </div>
+            <p class="body-text">
+                Construimos desde cero con tecnolog&iacute;a profesional. Su dominio actual se mantiene. Solo cambia lo que importa: velocidad, dise&ntilde;o y estabilidad.
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== QUE INCLUYE ===== -->
+    <div class="block text-section">
+        <div class="label-row">03 &mdash; Alcance</div>
+        <div class="big-text" style="margin-bottom: 10px;">Todo lo que necesita.</div>
+        <p class="body-text" style="margin-top: 0; margin-bottom: 10px;">Nada que no necesite.</p>
+        <div class="feat-list">
+            <div class="feat-row">
+                <span class="feat-num">01</span>
+                <span class="feat-name">Dise&ntilde;o profesional a medida</span>
+                <span class="feat-desc">Adaptado a su marca</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">02</span>
+                <span class="feat-name">Responsive en todos los dispositivos</span>
+                <span class="feat-desc">Celular, tablet y PC</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">03</span>
+                <span class="feat-name">Cat&aacute;logo de propiedades</span>
+                <span class="feat-desc">Fotos, precios, ubicaci&oacute;n</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">04</span>
+                <span class="feat-name">Bot&oacute;n de WhatsApp directo</span>
+                <span class="feat-desc">Contacto inmediato</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">05</span>
+                <span class="feat-name">Secci&oacute;n de servicios</span>
+                <span class="feat-desc">Venta, alquiler, asesor&iacute;a</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">06</span>
+                <span class="feat-name">Google Maps integrado</span>
+                <span class="feat-desc">Ubicaci&oacute;n de su oficina</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">07</span>
+                <span class="feat-name">Posicionamiento SEO</span>
+                <span class="feat-desc">Visible en Google</span>
+            </div>
+            <div class="feat-row">
+                <span class="feat-num">08</span>
+                <span class="feat-name">Carga en menos de 2 segundos</span>
+                <span class="feat-desc">Velocidad superior</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PRECIO ===== -->
+    <div class="block price-section">
+        <div class="price-label">Inversi&oacute;n</div>
+        <div class="price-big">
+            <span class="dollar">$</span>200
+        </div>
+        <div class="price-unit">USD</div>
+        <div class="price-desc">Pago &uacute;nico. Incluye dise&ntilde;o, desarrollo<br>y puesta en l&iacute;nea.</div>
+        <ul class="price-includes">
+            <li>P&aacute;gina web completa de cinco secciones</li>
+            <li>Hasta diez propiedades publicadas</li>
+            <li>Conexi&oacute;n a su dominio actual</li>
+            <li>Una ronda de ajustes incluida</li>
+            <li>Primer mes de hosting sin costo</li>
+        </ul>
+    </div>
+
+    <!-- ===== FORMA DE PAGO ===== -->
+    <div class="block text-section">
+        <div class="label-row">04 &mdash; Pago</div>
+        <div class="big-text">Dos pasos. Sin complicaciones.</div>
+        <div class="pay-row">
+            <div class="pay-card">
+                <div class="p-label">Adelanto</div>
+                <div class="p-amount">$100</div>
+                <div class="p-desc">Para iniciar</div>
+            </div>
+            <div class="pay-card">
+                <div class="p-label">Entrega</div>
+                <div class="p-amount">$100</div>
+                <div class="p-desc">Al recibir la p&aacute;gina</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TIMELINE ===== -->
+    <div class="block text-section">
+        <div class="label-row">05 &mdash; Entrega</div>
+        <div class="big-text" style="margin-bottom: 8px;">En cuatro d&iacute;as,</div>
+        <div class="big-text" style="color: var(--gray-400);">en l&iacute;nea.</div>
+        <div class="tl-list">
+            <div class="tl-item">
+                <div class="tl-step">01</div>
+                <div class="tl-info">
+                    <h4>Material</h4>
+                    <p>Usted nos env&iacute;a logo, fotograf&iacute;as, textos y datos de contacto.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-step">02</div>
+                <div class="tl-info">
+                    <h4>Desarrollo</h4>
+                    <p>Construimos la p&aacute;gina y le enviamos una vista previa.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-step">03</div>
+                <div class="tl-info">
+                    <h4>Entrega</h4>
+                    <p>Ajustes finales, conexi&oacute;n al dominio y p&aacute;gina funcionando.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== REQUISITOS ===== -->
+    <div class="block text-section">
+        <div class="label-row">06 &mdash; Requisitos</div>
+        <div class="big-text">Solo necesitamos esto de usted.</div>
+        <div class="req-grid">
+            <div class="req-item"><span>Logo de su empresa</span></div>
+            <div class="req-item"><span>N&uacute;mero de WhatsApp</span></div>
+            <div class="req-item"><span>Fotograf&iacute;as de propiedades</span></div>
+            <div class="req-item"><span>Direcci&oacute;n de la oficina</span></div>
+            <div class="req-item"><span>Descripci&oacute;n de cada inmueble</span></div>
+            <div class="req-item"><span>Acceso al panel del dominio</span></div>
+        </div>
+    </div>
+
+    <!-- ===== CTA ===== -->
+    <div class="block cta-section" style="padding-top: 80px; padding-bottom: 80px;">
+        <div class="cta-text">
+            <strong>Confirme esta propuesta</strong><br>
+            y arrancamos hoy mismo.
+        </div>
+        <a class="cta-btn" href="#">Confirmar por WhatsApp</a>
+        <div class="cta-small">Propuesta v&aacute;lida por 7 d&iacute;as</div>
+    </div>
+
+</body>
+</html>
