@@ -47,8 +47,7 @@
         /* NAVBAR */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 0 24px;
-            transition: all 0.4s var(--ease-smooth);
+            padding: 0 24px; transition: all 0.4s var(--ease-smooth);
         }
         .navbar.scrolled {
             background: var(--surface);
@@ -191,9 +190,7 @@
         .diag-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.75; }
 
         /* INVENTORY TABLE */
-        .inventory-table {
-            width: 100%; margin-top: 48px; border-collapse: collapse;
-        }
+        .inventory-table { width: 100%; margin-top: 48px; border-collapse: collapse; }
         .inventory-table th {
             font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 600;
             letter-spacing: 2px; text-transform: uppercase; color: var(--text-tertiary);
@@ -201,197 +198,155 @@
         }
         .inventory-table td {
             font-size: 15px; color: var(--text-secondary); padding: 16px;
-            border-bottom: 1px solid var(--border-light); font-weight: 300;
-            vertical-align: top;
+            border-bottom: 1px solid var(--border-light); font-weight: 300; vertical-align: top;
         }
         .inventory-table td:first-child {
             font-family: 'Sora', sans-serif; font-weight: 400; color: var(--text);
         }
         .inventory-table tr:hover td { background: var(--bg-alt); }
+        .complexity-tag {
+            display: inline-block; font-family: 'Sora', sans-serif; font-size: 10px;
+            font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+            padding: 3px 10px; border-radius: 100px;
+        }
+        .complexity-alta { background: #FFF0F0; color: #D32F2F; }
+        .complexity-media { background: #FFF8E1; color: #F57F17; }
+        .complexity-baja { background: #E8F5E9; color: #2E7D32; }
         @media (max-width: 640px) {
             .inventory-table, .inventory-table thead, .inventory-table tbody,
-            .inventory-table th, .inventory-table td, .inventory-table tr {
-                display: block;
-            }
+            .inventory-table th, .inventory-table td, .inventory-table tr { display: block; }
             .inventory-table thead { display: none; }
             .inventory-table tr {
                 margin-bottom: 16px; border: 1px solid var(--border-light);
                 border-radius: 12px; padding: 16px; background: var(--bg);
             }
-            .inventory-table td {
-                padding: 6px 0; border: none;
-                position: relative; padding-left: 0;
-            }
-            .inventory-table td:first-child {
-                font-size: 16px; font-weight: 500; margin-bottom: 4px;
-            }
+            .inventory-table td { padding: 6px 0; border: none; }
+            .inventory-table td:first-child { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
         }
 
-        /* COMPARISON */
-        .comparison-grid {
-            display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px;
+        /* PRICING TIERS */
+        .tiers-grid {
+            display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 56px;
         }
-        @media (min-width: 768px) { .comparison-grid { grid-template-columns: 1fr 1fr 1fr; } }
-        .comparison-card {
-            padding: 32px 28px; border-radius: 16px; border: 1px solid var(--border);
-            text-align: center; transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+        @media (min-width: 860px) { .tiers-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+        .tier-card {
+            border-radius: 20px; border: 1px solid var(--border);
+            background: var(--bg); overflow: hidden;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+            display: flex; flex-direction: column;
         }
-        .comparison-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
-        .comparison-card.highlight {
-            border-color: var(--accent); background: linear-gradient(135deg, #f0f7ff, #fff);
+        .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+
+        .tier-card.featured {
+            border: 2px solid var(--accent);
             position: relative;
+            box-shadow: 0 8px 40px rgba(0,113,227,0.12);
         }
-        .comparison-label {
-            font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase; color: var(--text-tertiary);
-            margin-bottom: 16px;
-        }
-        .comparison-card.highlight .comparison-label { color: var(--accent); }
-        .comparison-price {
-            font-family: 'Sora', sans-serif; font-size: clamp(36px, 7vw, 48px);
-            font-weight: 300; color: var(--text); letter-spacing: -0.03em;
-        }
-        .comparison-card.highlight .comparison-price { font-weight: 400; }
-        .comparison-note {
-            font-size: 14px; color: var(--text-tertiary); margin-top: 8px; font-weight: 300;
-        }
-        .badge-best {
-            display: inline-block; background: var(--accent); color: #fff;
+
+        .tier-badge {
+            position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: #fff;
             font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 600;
             letter-spacing: 2px; text-transform: uppercase;
-            padding: 4px 14px; border-radius: 100px; margin-bottom: 16px;
+            padding: 6px 20px; border-radius: 0 0 10px 10px;
         }
 
-        /* FEATURES LIST */
-        .features-list { margin-top: 56px; }
-        .feature-row {
-            display: grid; grid-template-columns: 40px 1fr; gap: 20px;
-            padding: 24px 0; border-bottom: 1px solid var(--border-light);
-            align-items: baseline; transition: all 0.3s var(--ease-smooth);
-        }
-        .feature-row:first-child { border-top: 1px solid var(--border-light); }
-        @media (min-width: 640px) { .feature-row { grid-template-columns: 40px 1fr 240px; } }
-        .feature-row:hover { padding-left: 8px; background: var(--bg-alt); border-radius: 8px; }
-        .feature-num {
-            font-family: 'Sora', sans-serif; font-size: 13px; color: var(--text-tertiary);
-            font-weight: 300; font-variant-numeric: tabular-nums;
-        }
-        .feature-name {
-            font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 400;
-            color: var(--text); letter-spacing: -0.01em;
-        }
-        .feature-desc { font-size: 14px; color: var(--text-tertiary); text-align: right; display: none; }
-        @media (min-width: 640px) { .feature-desc { display: block; } }
-
-        /* PHASE CARDS */
-        .phase-grid {
-            display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px;
-        }
-        @media (min-width: 768px) { .phase-grid { grid-template-columns: 1fr 1fr; } }
-        .phase-card {
-            padding: 36px 32px; border-radius: 16px; border: 1px solid var(--border);
-            background: var(--bg); transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
-        }
-        .phase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
-        .phase-tag {
-            font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
-            color: var(--accent);
-        }
-        .phase-title {
-            font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 500;
-            color: var(--text); margin-bottom: 8px;
-        }
-        .phase-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
-        .phase-items {
-            list-style: none; margin-top: 20px;
-        }
-        .phase-items li {
-            font-size: 14px; color: var(--text-secondary); padding: 8px 0;
+        .tier-header {
+            padding: 40px 32px 24px; text-align: center;
             border-bottom: 1px solid var(--border-light);
-            display: flex; align-items: center; gap: 12px; font-weight: 300;
         }
-        .phase-items li::before {
-            content: ''; width: 5px; height: 5px;
-            background: var(--accent); border-radius: 50%; flex-shrink: 0;
-        }
+        .tier-card.featured .tier-header { padding-top: 52px; }
 
-        /* PRICING */
-        .pricing-section {
-            background: var(--text); text-align: center; position: relative; overflow: hidden;
+        .tier-name {
+            font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase; color: var(--text-tertiary);
+            margin-bottom: 12px;
         }
-        .pricing-glow {
-            position: absolute; width: 500px; height: 500px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,113,227,0.08) 0%, transparent 65%);
-            top: 20%; left: 50%; transform: translateX(-50%); pointer-events: none;
+        .tier-card.featured .tier-name { color: var(--accent); }
+
+        .tier-price {
+            font-family: 'Sora', sans-serif; font-size: clamp(48px, 8vw, 64px);
+            font-weight: 200; color: var(--text); letter-spacing: -0.04em; line-height: 1;
         }
-        .pricing-section .section-inner { position: relative; z-index: 1; }
-        .pricing-eyebrow {
-            font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 500;
-            color: var(--accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 32px;
-        }
-        .pricing-amount {
-            font-family: 'Sora', sans-serif; font-size: clamp(72px, 18vw, 140px);
-            font-weight: 200; color: #ffffff; line-height: 1; letter-spacing: -0.04em;
-        }
-        .pricing-amount .dollar {
-            font-size: 0.35em; vertical-align: top; line-height: 2.2;
+        .tier-price .dollar {
+            font-size: 0.4em; vertical-align: top; line-height: 2;
             color: var(--text-tertiary); font-weight: 300;
         }
-        .pricing-unit {
-            font-family: 'Sora', sans-serif; font-size: 15px; color: var(--text-tertiary);
-            font-weight: 300; margin-top: 8px; letter-spacing: 3px; text-transform: uppercase;
-        }
-        .pricing-note {
-            font-size: 16px; color: var(--text-tertiary); font-weight: 300;
-            margin-top: 32px; line-height: 1.6;
-        }
-        .pricing-list {
-            list-style: none; max-width: 440px; margin: 48px auto 0; text-align: left;
-        }
-        .pricing-list li {
-            font-size: 15px; color: rgba(255,255,255,0.5); padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            display: flex; align-items: center; gap: 16px; font-weight: 300;
-        }
-        .pricing-list li::before {
-            content: ''; width: 6px; height: 6px;
-            background: var(--accent); border-radius: 50%; flex-shrink: 0;
-        }
-        .pricing-strikethrough {
-            font-family: 'Sora', sans-serif; font-size: 22px; color: var(--text-tertiary);
-            text-decoration: line-through; margin-bottom: 12px; font-weight: 300;
-        }
-        .pricing-savings {
-            display: inline-block; background: rgba(46,125,50,0.15); color: #66BB6A;
-            font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 500;
-            padding: 6px 18px; border-radius: 100px; margin-top: 16px;
-            letter-spacing: 1px;
+
+        .tier-desc {
+            font-size: 14px; color: var(--text-tertiary); margin-top: 12px;
+            font-weight: 300; line-height: 1.5;
         }
 
-        /* PAYMENT */
-        .payment-grid {
-            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
-            margin-top: 48px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+        .tier-body { padding: 28px 32px; flex: 1; }
+
+        .tier-section-label {
+            font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase; color: var(--text-tertiary);
+            margin-bottom: 12px; margin-top: 20px;
         }
-        @media (max-width: 640px) { .payment-grid { grid-template-columns: 1fr; } }
-        .payment-card {
-            padding: 40px 24px; text-align: center; transition: background 0.3s;
+        .tier-section-label:first-child { margin-top: 0; }
+
+        .tier-list { list-style: none; }
+        .tier-list li {
+            font-size: 14px; color: var(--text-secondary); padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex; align-items: flex-start; gap: 12px; font-weight: 300;
         }
-        .payment-card:not(:last-child) { border-right: 1px solid var(--border); }
+        .tier-list li::before {
+            content: ''; width: 5px; height: 5px; margin-top: 8px;
+            background: var(--accent); border-radius: 50%; flex-shrink: 0;
+        }
+        .tier-list li.disabled {
+            color: var(--border); text-decoration: line-through;
+        }
+        .tier-list li.disabled::before { background: var(--border); }
+
+        .tier-footer { padding: 24px 32px 32px; }
+        .tier-btn {
+            display: block; width: 100%; text-align: center; padding: 14px 24px;
+            border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px; font-weight: 500; text-decoration: none;
+            transition: all 0.3s var(--ease-smooth);
+        }
+        .tier-btn-outline {
+            background: var(--bg); color: var(--text); border: 1px solid var(--border);
+        }
+        .tier-btn-outline:hover { background: var(--bg-alt); border-color: var(--text); }
+        .tier-btn-primary {
+            background: var(--accent); color: #fff; border: 1px solid var(--accent);
+            box-shadow: 0 4px 16px rgba(0,113,227,0.25);
+        }
+        .tier-btn-primary:hover { transform: scale(1.02); box-shadow: 0 6px 24px rgba(0,113,227,0.35); }
+        .tier-btn-dark {
+            background: var(--text); color: #fff; border: 1px solid var(--text);
+        }
+        .tier-btn-dark:hover { background: #333; }
+
+        /* MARKET REFERENCE */
+        .market-bar {
+            display: flex; align-items: center; gap: 20px; margin-top: 48px;
+            padding: 28px 32px; border-radius: 16px; background: var(--bg-alt);
+            border: 1px solid var(--border-light); flex-wrap: wrap;
+        }
+        .market-bar-label {
+            font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase; color: var(--text-tertiary);
+        }
+        .market-bar-item {
+            font-size: 15px; color: var(--text-secondary); font-weight: 300;
+        }
+        .market-bar-item strong {
+            font-weight: 500; color: var(--text);
+        }
+        .market-bar-divider {
+            width: 1px; height: 24px; background: var(--border);
+        }
         @media (max-width: 640px) {
-            .payment-card:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
+            .market-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .market-bar-divider { width: 100%; height: 1px; }
         }
-        .payment-card:nth-child(2) { background: var(--bg-alt); }
-        .payment-label {
-            font-family: 'Sora', sans-serif; font-size: 11px; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; font-weight: 400;
-        }
-        .payment-amount {
-            font-family: 'Sora', sans-serif; font-size: clamp(28px, 6vw, 40px);
-            font-weight: 300; color: var(--text); letter-spacing: -0.03em;
-        }
-        .payment-desc { font-size: 14px; color: var(--text-tertiary); margin-top: 8px; font-weight: 300; }
 
         /* TIMELINE */
         .timeline { margin-top: 56px; }
@@ -461,9 +416,6 @@
             .hero { min-height: auto; padding: 60px 24px; }
             section { padding: 60px 24px; }
             .reveal { opacity: 1; transform: none; }
-            .pricing-section, .cta-section, .hero {
-                -webkit-print-color-adjust: exact; print-color-adjust: exact;
-            }
         }
     </style>
 </head>
@@ -473,7 +425,7 @@
     <nav class="navbar hero-active" id="navbar">
         <div class="navbar-inner">
             <a href="#" class="nav-logo">Enova</a>
-            <a href="https://wa.me/584247490499?text=Hola%2C%20quiero%20confirmar%20la%20propuesta%20de%20reconstrucci%C3%B3n%20de%20mi%20plataforma" target="_blank" class="nav-cta">Confirmar propuesta</a>
+            <a href="https://wa.me/584247490499?text=Hola%2C%20quiero%20confirmar%20la%20propuesta%20de%20reconstrucci%C3%B3n%20de%20mi%20plataforma" target="_blank" class="nav-cta">Elegir mi plan</a>
         </div>
     </nav>
 
@@ -483,7 +435,7 @@
         <div class="hero-content">
             <p class="hero-eyebrow">Propuesta actualizada</p>
             <h1>Su plataforma inmobiliaria,<br><strong>reconstruida desde cero.</strong></h1>
-            <p class="hero-subtitle">Reconstrucci&oacute;n profesional completa de chiclayopropiedades.com</p>
+            <p class="hero-subtitle">Tres opciones para reconstruir chiclayopropiedades.com con tecnolog&iacute;a profesional.</p>
             <div class="hero-meta">
                 <div class="hero-meta-item">
                     <div class="hero-meta-label">Preparado para</div>
@@ -519,7 +471,7 @@
                     </div>
                     <div class="diag-card solution reveal reveal-delay-4">
                         <div class="diag-tag">Lo que haremos</div>
-                        <p>Reconstruir toda la plataforma con tecnolog&iacute;a profesional: r&aacute;pida, estable y escalable. Todas las funcionalidades actuales se mantienen y mejoran. Su dominio no cambia.</p>
+                        <p>Reconstruir su plataforma con tecnolog&iacute;a profesional: r&aacute;pida, estable y escalable. Usted elige cu&aacute;ntas funcionalidades reconstruir seg&uacute;n su presupuesto.</p>
                     </div>
                 </div>
             </div>
@@ -532,195 +484,233 @@
             <div class="section-inner">
                 <p class="section-eyebrow reveal">02 &mdash; Lo que usted tiene hoy</p>
                 <h2 class="section-heading reveal reveal-delay-1">
-                    11 p&aacute;ginas. 13 funcionalidades. <strong>Todo ser&aacute; reconstruido.</strong>
+                    11 p&aacute;ginas. 13 funcionalidades. <strong>Este es el inventario real.</strong>
                 </h2>
                 <p class="section-body reveal reveal-delay-2">
-                    Este es el inventario completo de su plataforma actual. Todo esto ser&aacute; reconstruido con tecnolog&iacute;a profesional.
+                    Cada funcionalidad tiene un nivel de complejidad diferente. Esto determina el tiempo y costo de reconstrucci&oacute;n.
                 </p>
                 <table class="inventory-table reveal reveal-delay-3">
                     <thead>
                         <tr>
-                            <th>P&aacute;gina / Funci&oacute;n</th>
+                            <th>Funcionalidad</th>
                             <th>Descripci&oacute;n</th>
+                            <th>Complejidad</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>P&aacute;gina de inicio</td>
-                            <td>Landing con propiedades destacadas, video, asesores top, capacitaciones y newsletter</td>
+                            <td>Panel de agentes + subida de fotos</td>
+                            <td>Los agentes crean, editan y eliminan propiedades con m&uacute;ltiples fotos</td>
+                            <td><span class="complexity-tag complexity-alta">Alta</span></td>
                         </tr>
                         <tr>
-                            <td>Cat&aacute;logo de propiedades</td>
-                            <td>Listado completo con b&uacute;squeda por texto, filtros por precio y tipo de inmueble</td>
+                            <td>Login y registro con 2 roles</td>
+                            <td>Autenticaci&oacute;n con l&oacute;gica diferente para Comprador y Agente</td>
+                            <td><span class="complexity-tag complexity-alta">Alta</span></td>
                         </tr>
                         <tr>
-                            <td>Detalle de propiedad</td>
-                            <td>Galer&iacute;a de m&uacute;ltiples fotos, especificaciones, descripci&oacute;n, asesor a cargo</td>
+                            <td>Cat&aacute;logo con b&uacute;squeda y filtros</td>
+                            <td>B&uacute;squeda por texto, filtro por precio y tipo de inmueble</td>
+                            <td><span class="complexity-tag complexity-alta">Alta</span></td>
                         </tr>
                         <tr>
-                            <td>Servicios</td>
-                            <td>3 categor&iacute;as: servicios para empresas, generales y para asesores</td>
+                            <td>Detalle de propiedad con galer&iacute;a</td>
+                            <td>Galer&iacute;a de m&uacute;ltiples fotos, specs, descripci&oacute;n, asesor vinculado</td>
+                            <td><span class="complexity-tag complexity-alta">Alta</span></td>
                         </tr>
                         <tr>
                             <td>Ranking de asesores</td>
-                            <td>Sistema din&aacute;mico que clasifica agentes por volumen de ventas</td>
+                            <td>Clasificaci&oacute;n autom&aacute;tica por volumen de ventas</td>
+                            <td><span class="complexity-tag complexity-media">Media</span></td>
                         </tr>
                         <tr>
-                            <td>Capacitaciones</td>
-                            <td>Cursos con precios, modalidad (presencial/virtual), instructor e inscripci&oacute;n</td>
+                            <td>Capacitaciones con inscripci&oacute;n</td>
+                            <td>Cursos con precios, modalidad, instructor</td>
+                            <td><span class="complexity-tag complexity-media">Media</span></td>
                         </tr>
                         <tr>
                             <td>Blog</td>
-                            <td>Sistema de art&iacute;culos para noticias y consejos inmobiliarios</td>
+                            <td>Sistema de art&iacute;culos para noticias inmobiliarias</td>
+                            <td><span class="complexity-tag complexity-media">Media</span></td>
+                        </tr>
+                        <tr>
+                            <td>Newsletter</td>
+                            <td>Suscripci&oacute;n por email para recibir propiedades</td>
+                            <td><span class="complexity-tag complexity-media">Media</span></td>
+                        </tr>
+                        <tr>
+                            <td>P&aacute;gina de inicio</td>
+                            <td>Landing con propiedades destacadas, video, asesores top</td>
+                            <td><span class="complexity-tag complexity-baja">Baja</span></td>
+                        </tr>
+                        <tr>
+                            <td>Servicios</td>
+                            <td>3 categor&iacute;as de servicios inmobiliarios</td>
+                            <td><span class="complexity-tag complexity-baja">Baja</span></td>
                         </tr>
                         <tr>
                             <td>Contacto</td>
                             <td>Formulario, informaci&oacute;n, horarios, redes sociales</td>
-                        </tr>
-                        <tr>
-                            <td>Login y registro</td>
-                            <td>Autenticaci&oacute;n con email/contrase&ntilde;a y 2 tipos de cuenta: Comprador y Agente</td>
+                            <td><span class="complexity-tag complexity-baja">Baja</span></td>
                         </tr>
                         <tr>
                             <td>WhatsApp flotante</td>
-                            <td>Bot&oacute;n de contacto directo visible en todas las p&aacute;ginas</td>
-                        </tr>
-                        <tr>
-                            <td>Newsletter</td>
-                            <td>Suscripci&oacute;n por email para recibir propiedades y noticias</td>
+                            <td>Bot&oacute;n de contacto directo en todas las p&aacute;ginas</td>
+                            <td><span class="complexity-tag complexity-baja">Baja</span></td>
                         </tr>
                         <tr>
                             <td>P&aacute;ginas legales</td>
                             <td>Pol&iacute;tica de privacidad y t&eacute;rminos de servicio</td>
-                        </tr>
-                        <tr>
-                            <td>Tags de propiedades</td>
-                            <td>Etiquetas Premium, Vendida, contador de vistas por propiedad</td>
+                            <td><span class="complexity-tag complexity-baja">Baja</span></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </section>
 
-        <hr class="section-divider">
-
-        <!-- COMPARACION DE MERCADO -->
-        <section>
-            <div class="section-inner">
-                <p class="section-eyebrow reveal">03 &mdash; Referencia de mercado</p>
-                <h2 class="section-heading reveal reveal-delay-1">
-                    Cu&aacute;nto cuesta esto <em>en el mercado real.</em>
-                </h2>
-                <p class="section-body reveal reveal-delay-2">
-                    Una plataforma inmobiliaria con autenticaci&oacute;n, roles, CRUD de propiedades y las funcionalidades que usted tiene hoy, tiene estos precios de referencia:
-                </p>
-                <div class="comparison-grid">
-                    <div class="comparison-card reveal reveal-delay-3">
-                        <div class="comparison-label">Freelancer promedio</div>
-                        <div class="comparison-price">$1,500</div>
-                        <div class="comparison-note">3 a 5 semanas</div>
-                    </div>
-                    <div class="comparison-card reveal reveal-delay-4">
-                        <div class="comparison-label">Agencia</div>
-                        <div class="comparison-price">$5,000</div>
-                        <div class="comparison-note">6 a 10 semanas</div>
-                    </div>
-                    <div class="comparison-card highlight reveal reveal-delay-5">
-                        <div class="badge-best">Nuestra propuesta</div>
-                        <div class="comparison-label">Enova Group</div>
-                        <div class="comparison-price">$500</div>
-                        <div class="comparison-note">Entrega por fases</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PRECIO -->
-        <section class="pricing-section">
-            <div class="pricing-glow"></div>
-            <div class="section-inner">
-                <p class="pricing-eyebrow reveal">Inversi&oacute;n total</p>
-                <div class="pricing-strikethrough reveal reveal-delay-1">$1,500 USD</div>
-                <div class="pricing-amount reveal reveal-delay-1">
-                    <span class="dollar">$</span><span class="counter" data-target="500">0</span>
-                </div>
-                <div class="pricing-unit reveal reveal-delay-2">USD</div>
-                <div class="pricing-savings reveal reveal-delay-2">Ahorra $1,000 vs. precio de mercado</div>
-                <p class="pricing-note reveal reveal-delay-3">Plataforma inmobiliaria completa. Todas las funcionalidades reconstruidas.</p>
-                <ul class="pricing-list">
-                    <li class="reveal reveal-delay-3">11 p&aacute;ginas completamente funcionales</li>
-                    <li class="reveal reveal-delay-3">Sistema de login y registro con 2 roles</li>
-                    <li class="reveal reveal-delay-4">Cat&aacute;logo con b&uacute;squeda, filtros y galer&iacute;a de fotos</li>
-                    <li class="reveal reveal-delay-4">Ranking de asesores din&aacute;mico</li>
-                    <li class="reveal reveal-delay-5">M&oacute;dulo de capacitaciones con inscripci&oacute;n</li>
-                    <li class="reveal reveal-delay-5">Blog, newsletter, contacto y WhatsApp</li>
-                    <li class="reveal reveal-delay-5">Conexi&oacute;n a su dominio actual</li>
-                    <li class="reveal reveal-delay-5">Soporte post-entrega incluido</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- FASES DE ENTREGA -->
-        <section>
-            <div class="section-inner">
-                <p class="section-eyebrow reveal">04 &mdash; Plan de entrega</p>
-                <h2 class="section-heading reveal reveal-delay-1">
-                    Entrega por fases. <strong>Resultados desde el d&iacute;a uno.</strong>
-                </h2>
-                <p class="section-body reveal reveal-delay-2">
-                    No espera semanas para ver resultados. Entregamos por fases para que su plataforma est&eacute; funcionando lo antes posible.
-                </p>
-                <div class="phase-grid">
-                    <div class="phase-card reveal reveal-delay-3">
-                        <div class="phase-tag">Fase 1 &mdash; Semana 1</div>
-                        <div class="phase-title">La cara p&uacute;blica</div>
-                        <div class="phase-desc">Todo lo que sus clientes ven cuando visitan la p&aacute;gina.</div>
-                        <ul class="phase-items">
-                            <li>P&aacute;gina de inicio profesional</li>
-                            <li>Cat&aacute;logo de propiedades con fotos y filtros</li>
-                            <li>Detalle de cada propiedad</li>
-                            <li>Servicios, contacto y WhatsApp</li>
-                            <li>Responsive en celular, tablet y PC</li>
-                        </ul>
-                    </div>
-                    <div class="phase-card reveal reveal-delay-4">
-                        <div class="phase-tag">Fase 2 &mdash; Semana 2-3</div>
-                        <div class="phase-title">El motor de la plataforma</div>
-                        <div class="phase-desc">Las funcionalidades que hacen que su negocio funcione solo.</div>
-                        <ul class="phase-items">
-                            <li>Login y registro (Comprador + Agente)</li>
-                            <li>Panel para que agentes suban propiedades</li>
-                            <li>Ranking de asesores autom&aacute;tico</li>
-                            <li>Capacitaciones con inscripci&oacute;n</li>
-                            <li>Blog y newsletter</li>
-                        </ul>
-                    </div>
+                <div class="market-bar reveal reveal-delay-4">
+                    <div class="market-bar-label">Referencia de mercado</div>
+                    <div class="market-bar-divider"></div>
+                    <div class="market-bar-item">Freelancer promedio: <strong>$1,500 &ndash; $3,000</strong></div>
+                    <div class="market-bar-divider"></div>
+                    <div class="market-bar-item">Agencia: <strong>$5,000 &ndash; $10,000</strong></div>
                 </div>
             </div>
         </section>
 
         <hr class="section-divider">
 
-        <!-- FORMA DE PAGO -->
+        <!-- PLANES / TIERS -->
+        <section id="planes">
+            <div class="section-inner">
+                <p class="section-eyebrow reveal">03 &mdash; Elija su plan</p>
+                <h2 class="section-heading reveal reveal-delay-1">
+                    Tres opciones. <strong>Usted decide hasta d&oacute;nde llegar.</strong>
+                </h2>
+                <p class="section-body reveal reveal-delay-2">
+                    Cada plan incluye todo lo del anterior. Todas las opciones se entregan esta semana.
+                </p>
+
+                <div class="tiers-grid">
+
+                    <!-- PLAN BASICO -->
+                    <div class="tier-card reveal reveal-delay-3">
+                        <div class="tier-header">
+                            <div class="tier-name">B&aacute;sico</div>
+                            <div class="tier-price"><span class="dollar">$</span>200</div>
+                            <div class="tier-desc">La cara p&uacute;blica de su negocio.<br>Profesional y lista para recibir clientes.</div>
+                        </div>
+                        <div class="tier-body">
+                            <div class="tier-section-label">Incluye</div>
+                            <ul class="tier-list">
+                                <li>P&aacute;gina de inicio profesional</li>
+                                <li>Cat&aacute;logo de propiedades (hasta 15)</li>
+                                <li>Detalle de cada propiedad con fotos</li>
+                                <li>Secci&oacute;n de servicios</li>
+                                <li>P&aacute;gina de contacto</li>
+                                <li>WhatsApp flotante</li>
+                                <li>Responsive (celular, tablet, PC)</li>
+                                <li>Conexi&oacute;n a su dominio</li>
+                                <li>SEO y carga r&aacute;pida</li>
+                            </ul>
+                            <div class="tier-section-label">No incluye</div>
+                            <ul class="tier-list">
+                                <li class="disabled">Login y registro de usuarios</li>
+                                <li class="disabled">B&uacute;squeda con filtros din&aacute;micos</li>
+                                <li class="disabled">Panel de agentes</li>
+                                <li class="disabled">Ranking, blog, capacitaciones</li>
+                            </ul>
+                        </div>
+                        <div class="tier-footer">
+                            <a href="https://wa.me/584247490499?text=Hola%2C%20quiero%20el%20Plan%20B%C3%A1sico%20%28%24200%29%20para%20chiclayopropiedades.com" target="_blank" class="tier-btn tier-btn-outline">Elegir B&aacute;sico</a>
+                        </div>
+                    </div>
+
+                    <!-- PLAN PROFESIONAL -->
+                    <div class="tier-card featured reveal reveal-delay-4">
+                        <div class="tier-badge">Recomendado</div>
+                        <div class="tier-header">
+                            <div class="tier-name">Profesional</div>
+                            <div class="tier-price"><span class="dollar">$</span>500</div>
+                            <div class="tier-desc">Su plataforma con usuarios reales.<br>Buscan, filtran y se registran.</div>
+                        </div>
+                        <div class="tier-body">
+                            <div class="tier-section-label">Todo lo del B&aacute;sico m&aacute;s</div>
+                            <ul class="tier-list">
+                                <li><strong>Login y registro</strong> con 2 roles (Comprador + Agente)</li>
+                                <li><strong>B&uacute;squeda din&aacute;mica</strong> por texto, precio y tipo</li>
+                                <li>Galer&iacute;a de fotos avanzada por propiedad</li>
+                                <li>Tags de propiedades (Premium, Vendida)</li>
+                                <li>Perfiles de usuario</li>
+                                <li>Base de datos profesional</li>
+                                <li>Una ronda de ajustes incluida</li>
+                            </ul>
+                            <div class="tier-section-label">No incluye</div>
+                            <ul class="tier-list">
+                                <li class="disabled">Panel para que agentes suban propiedades</li>
+                                <li class="disabled">Ranking, blog, capacitaciones</li>
+                            </ul>
+                        </div>
+                        <div class="tier-footer">
+                            <a href="https://wa.me/584247490499?text=Hola%2C%20quiero%20el%20Plan%20Profesional%20%28%24500%29%20para%20chiclayopropiedades.com" target="_blank" class="tier-btn tier-btn-primary">Elegir Profesional</a>
+                        </div>
+                    </div>
+
+                    <!-- PLAN COMPLETO -->
+                    <div class="tier-card reveal reveal-delay-5">
+                        <div class="tier-header">
+                            <div class="tier-name">Completo</div>
+                            <div class="tier-price"><span class="dollar">$</span>900</div>
+                            <div class="tier-desc">La plataforma entera funcionando.<br>Su negocio opera solo.</div>
+                        </div>
+                        <div class="tier-body">
+                            <div class="tier-section-label">Todo lo del Profesional m&aacute;s</div>
+                            <ul class="tier-list">
+                                <li><strong>Panel de agentes</strong> para subir propiedades con fotos</li>
+                                <li><strong>Ranking de asesores</strong> autom&aacute;tico por ventas</li>
+                                <li><strong>Capacitaciones</strong> con inscripci&oacute;n y precios</li>
+                                <li><strong>Blog</strong> para publicar art&iacute;culos</li>
+                                <li><strong>Newsletter</strong> funcional</li>
+                                <li>Panel de administraci&oacute;n</li>
+                                <li>Dos rondas de ajustes incluidas</li>
+                                <li>Soporte post-entrega 30 d&iacute;as</li>
+                            </ul>
+                        </div>
+                        <div class="tier-footer">
+                            <a href="https://wa.me/584247490499?text=Hola%2C%20quiero%20el%20Plan%20Completo%20%28%24900%29%20para%20chiclayopropiedades.com" target="_blank" class="tier-btn tier-btn-dark">Elegir Completo</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ENTREGA -->
         <section>
             <div class="section-inner">
-                <p class="section-eyebrow reveal">05 &mdash; Pago</p>
-                <h2 class="section-heading reveal reveal-delay-1">Tres pagos. <span style="color: var(--text-tertiary); font-weight: 200;">Sin sorpresas.</span></h2>
-                <div class="payment-grid reveal reveal-delay-2">
-                    <div class="payment-card">
-                        <div class="payment-label">Para iniciar</div>
-                        <div class="payment-amount">$200</div>
-                        <div class="payment-desc">Arrancamos de inmediato</div>
+                <p class="section-eyebrow reveal">04 &mdash; Entrega</p>
+                <h2 class="section-heading reveal reveal-delay-1">Cualquier plan. <span style="color: var(--text-tertiary); font-weight: 200;">Esta semana.</span></h2>
+                <div class="timeline">
+                    <div class="timeline-row reveal reveal-delay-2">
+                        <div class="timeline-num">01</div>
+                        <div>
+                            <div class="timeline-title">Material</div>
+                            <div class="timeline-desc">Usted nos env&iacute;a logo, fotograf&iacute;as, textos y datos de contacto.</div>
+                        </div>
                     </div>
-                    <div class="payment-card">
-                        <div class="payment-label">Al entregar Fase 1</div>
-                        <div class="payment-amount">$150</div>
-                        <div class="payment-desc">Cara p&uacute;blica funcionando</div>
+                    <div class="timeline-row reveal reveal-delay-3">
+                        <div class="timeline-num">02</div>
+                        <div>
+                            <div class="timeline-title">Desarrollo</div>
+                            <div class="timeline-desc">Construimos la plataforma y le enviamos una vista previa para su aprobaci&oacute;n.</div>
+                        </div>
                     </div>
-                    <div class="payment-card">
-                        <div class="payment-label">Al entregar Fase 2</div>
-                        <div class="payment-amount">$150</div>
-                        <div class="payment-desc">Plataforma completa</div>
+                    <div class="timeline-row reveal reveal-delay-4">
+                        <div class="timeline-num">03</div>
+                        <div>
+                            <div class="timeline-title">Entrega</div>
+                            <div class="timeline-desc">Ajustes finales, conexi&oacute;n al dominio y plataforma funcionando.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -731,7 +721,7 @@
         <!-- REQUISITOS -->
         <section>
             <div class="section-inner">
-                <p class="section-eyebrow reveal">06 &mdash; Requisitos</p>
+                <p class="section-eyebrow reveal">05 &mdash; Requisitos</p>
                 <h2 class="section-heading reveal reveal-delay-1">Solo necesitamos<br><strong>esto de usted.</strong></h2>
                 <div class="req-grid">
                     <div class="req-item reveal reveal-delay-2">
@@ -758,14 +748,6 @@
                         <div class="req-dot"></div>
                         <span>Acceso al panel del dominio</span>
                     </div>
-                    <div class="req-item reveal reveal-delay-5">
-                        <div class="req-dot"></div>
-                        <span>Lista de capacitaciones actuales</span>
-                    </div>
-                    <div class="req-item reveal reveal-delay-5">
-                        <div class="req-dot"></div>
-                        <span>Datos de los asesores del equipo</span>
-                    </div>
                 </div>
             </div>
         </section>
@@ -775,10 +757,10 @@
             <div class="cta-glow"></div>
             <div class="section-inner">
                 <h2 class="cta-heading reveal">
-                    <strong>Confirme esta propuesta</strong><br>
+                    <strong>Elija su plan</strong><br>
                     y arrancamos hoy mismo.
                 </h2>
-                <a class="cta-btn reveal reveal-delay-1" href="https://wa.me/584247490499?text=Hola%2C%20quiero%20confirmar%20la%20propuesta%20de%20reconstrucci%C3%B3n%20de%20mi%20plataforma%20inmobiliaria%20por%20%24500" target="_blank">Confirmar por WhatsApp</a>
+                <a class="cta-btn reveal reveal-delay-1" href="#planes">Ver los 3 planes</a>
                 <p class="cta-note reveal reveal-delay-2">Propuesta v&aacute;lida por 7 d&iacute;as</p>
             </div>
         </section>
@@ -812,25 +794,6 @@
             }
         }, { threshold: 0.1 });
         navObserver.observe(hero);
-
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target);
-                    let current = 0;
-                    const duration = 1200;
-                    const step = target / (duration / 16);
-                    const timer = setInterval(() => {
-                        current += step;
-                        if (current >= target) { current = target; clearInterval(timer); }
-                        el.textContent = Math.floor(current);
-                    }, 16);
-                    counterObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
